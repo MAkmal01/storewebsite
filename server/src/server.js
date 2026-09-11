@@ -3,6 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import healthRoutes from './routes/health.routes.js';
+import productRoutes from './routes/product.routes.js';
+import orderRoutes from './routes/order.routes.js';
+import reviewRoutes from './routes/review.routes.js';
+import newsletterRoutes from './routes/newsletter.routes.js';
+import adminRoutes from './routes/admin.routes.js';
 import { notFoundHandler, errorHandler } from './middleware/errorHandler.js';
 
 // Load environment variables
@@ -25,13 +30,23 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use('/api', healthRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Base route
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to the Store Website MERN API',
+    message: 'Welcome to Royal Choice API',
     endpoints: {
       health: '/api/health',
+      products: '/api/products',
+      orders: '/api/orders',
+      reviews: '/api/reviews',
+      newsletter: '/api/newsletter',
+      admin: '/api/admin',
     },
   });
 });
