@@ -52,6 +52,7 @@ export default function Footer() {
       {/* Main Footer Grid */}
       <div className="container" style={{ padding: '64px 24px 48px' }}>
         <div
+          id="footer-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1.6fr 1fr 1fr 1fr',
@@ -213,12 +214,12 @@ export default function Footer() {
 
       <style>{`
         @media (max-width: 900px) {
-          footer > div:first-child > div > div {
+          #footer-grid {
             grid-template-columns: 1fr 1fr !important;
           }
         }
         @media (max-width: 540px) {
-          footer > div:first-child > div > div {
+          #footer-grid {
             grid-template-columns: 1fr !important;
           }
         }

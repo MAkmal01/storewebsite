@@ -152,7 +152,7 @@ export default function ProductDetailPage({ onQuickView }) {
       </div>
 
       {/* Main Product Layout */}
-      <div className="container" style={{ padding: '8px 24px 64px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
+      <div id="product-detail-layout" className="container" style={{ padding: '8px 24px 64px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
         {/* Left: Image Gallery */}
         <div id="product-gallery">
           {/* Main Image */}
@@ -366,18 +366,22 @@ export default function ProductDetailPage({ onQuickView }) {
 
           {/* Accordions */}
           <Accordion title="Product Details">
-            {product.details?.length ? (
+            {Array.isArray(product.details) && product.details.length > 0 ? (
               <ul style={{ paddingLeft: '16px' }}>
                 {product.details.map((d, i) => <li key={i} style={{ marginBottom: '4px' }}>{d}</li>)}
               </ul>
+            ) : typeof product.details === 'string' && product.details.trim() ? (
+              <p style={{ whiteSpace: 'pre-line' }}>{product.details}</p>
             ) : <p>No additional details available.</p>}
           </Accordion>
 
           <Accordion title="Care Instructions">
-            {product.careInstructions?.length ? (
+            {Array.isArray(product.careInstructions) && product.careInstructions.length > 0 ? (
               <ul style={{ paddingLeft: '16px' }}>
                 {product.careInstructions.map((c, i) => <li key={i} style={{ marginBottom: '4px' }}>{c}</li>)}
               </ul>
+            ) : typeof product.careInstructions === 'string' && product.careInstructions.trim() ? (
+              <p style={{ whiteSpace: 'pre-line' }}>{product.careInstructions}</p>
             ) : <p>Please follow standard garment care instructions.</p>}
           </Accordion>
 
@@ -449,7 +453,7 @@ export default function ProductDetailPage({ onQuickView }) {
               </p>
             ) : (
               <form onSubmit={handleReviewSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div id="review-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                   <div>
                     <label className="form-label">Your Name *</label>
                     <input className="form-input" required value={reviewForm.authorName} onChange={(e) => setReviewForm({ ...reviewForm, authorName: e.target.value })} placeholder="Ahmed Khan" />
@@ -502,7 +506,8 @@ export default function ProductDetailPage({ onQuickView }) {
 
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }
         @media (max-width: 768px) {
-          #product-gallery, #product-info { grid-column: 1 !important; }
+          #product-detail-layout { grid-template-columns: 1fr !important; gap: 32px !important; }
+          #review-form-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>

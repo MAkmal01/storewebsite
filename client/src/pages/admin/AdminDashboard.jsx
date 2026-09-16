@@ -136,6 +136,7 @@ export default function AdminDashboard() {
   const [productForm, setProductForm] = useState({
     title: '', description: '', price: '', comparePrice: '', category: 'watches',
     inStock: true, stockQuantity: 50, badge: '', images: [''],
+    details: '', careInstructions: '',
   });
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -163,12 +164,29 @@ export default function AdminDashboard() {
   /* --- Product CRUD --- */
   const openNewProduct = () => {
     setEditingProduct(null);
-    setProductForm({ title: '', description: '', price: '', comparePrice: '', category: 'watches', inStock: true, stockQuantity: 50, badge: '', images: [], imageFiles: [] });
+    setProductForm({ 
+      title: '', description: '', price: '', comparePrice: '', category: 'watches', 
+      inStock: true, stockQuantity: 50, badge: '', images: [], imageFiles: [],
+      details: '', careInstructions: '',
+    });
     setShowProductModal(true);
   };
   const openEditProduct = (p) => {
     setEditingProduct(p);
-    setProductForm({ title: p.title, description: p.description, price: p.price, comparePrice: p.comparePrice || '', category: p.category, inStock: p.inStock, stockQuantity: p.stockQuantity, badge: p.badge || '', images: p.images?.length ? [...p.images] : [], imageFiles: [] });
+    setProductForm({ 
+      title: p.title, 
+      description: p.description, 
+      price: p.price, 
+      comparePrice: p.comparePrice || '', 
+      category: p.category, 
+      inStock: p.inStock, 
+      stockQuantity: p.stockQuantity, 
+      badge: p.badge || '', 
+      images: p.images?.length ? [...p.images] : [], 
+      imageFiles: [],
+      details: Array.isArray(p.details) ? p.details.join('\n') : (p.details || ''),
+      careInstructions: Array.isArray(p.careInstructions) ? p.careInstructions.join('\n') : (p.careInstructions || ''),
+    });
     setShowProductModal(true);
   };
   const saveProduct = async () => {
@@ -183,6 +201,8 @@ export default function AdminDashboard() {
       formData.append('category', productForm.category);
       formData.append('inStock', productForm.inStock);
       if (productForm.badge) formData.append('badge', productForm.badge);
+      formData.append('details', productForm.details || '');
+      formData.append('careInstructions', productForm.careInstructions || '');
       
       productForm.images.forEach(img => formData.append('images', img));
       if (productForm.imageFiles) {
@@ -542,6 +562,30 @@ export default function AdminDashboard() {
                     <option value="ESSENTIAL">ESSENTIAL</option>
                   </select>
                 </div>
+              </div>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: '#7A5B27' }}>Product Details (Key Specifications)</label>
+                  <span style={{ fontSize: '11px', color: 'rgba(122,91,39,0.5)' }}>One bullet point per line</span>
+                </div>
+                <textarea
+                  style={{ ...S.input, minHeight: '80px', resize: 'vertical' }}
+                  value={productForm.details || ''}
+                  onChange={e => setProductForm({ ...productForm, details: e.target.value })}
+                  placeholder={'Material: 100% Full-grain Leather\nDimensions: 4.5" x 3.5"\n8 Card Slots, 2 Bill Compartments\nRFID Blocking'}
+                />
+              </div>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <label style={{ fontSize: '12px', fontWeight: 600, color: '#7A5B27' }}>Care Instructions</label>
+                  <span style={{ fontSize: '11px', color: 'rgba(122,91,39,0.5)' }}>One instruction per line</span>
+                </div>
+                <textarea
+                  style={{ ...S.input, minHeight: '80px', resize: 'vertical' }}
+                  value={productForm.careInstructions || ''}
+                  onChange={e => setProductForm({ ...productForm, careInstructions: e.target.value })}
+                  placeholder={'Wipe clean gently with a soft dry cloth.\nAvoid contact with water and strong chemicals.\nStore in a cool, dry place.'}
+                />
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#7A5B27', marginBottom: '6px' }}>Images</label>

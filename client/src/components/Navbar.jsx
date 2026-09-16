@@ -69,43 +69,58 @@ export default function Navbar({ onSearchOpen, onTrackOrderOpen }) {
           {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        {/* Logo */}
-        <Link
-          to="/"
-          id="site-logo"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textDecoration: 'none',
-            lineHeight: 1,
-            flex: '0 0 auto',
-          }}
-        >
-          <span
+        {/* Logo and Photo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <Link
+            to="/"
+            id="site-logo"
             style={{
-              fontFamily: 'var(--font-heading)',
-              fontWeight: 800,
-              fontSize: '24px',
-              letterSpacing: '-0.03em',
-              color: 'var(--color-fg)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textDecoration: 'none',
+              lineHeight: 1,
+              flex: '0 0 auto',
             }}
           >
-            ROYAL CHOICE
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '8px',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: 'var(--color-fg-subtle)',
-              fontWeight: 500,
-            }}
-          >
-            THE MARK OF ROYALTY
-          </span>
-        </Link>
+            <>
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontWeight: 800,
+                  fontSize: '24px',
+                  letterSpacing: '-0.03em',
+                  color: 'var(--color-fg)',
+                }}
+              >
+                ROYAL CHOICE
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '8px',
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-fg-subtle)',
+                  fontWeight: 500,
+                }}
+              >
+                THE MARK OF ROYALTY
+              </span>
+            </>
+          </Link>
+          <img 
+            className="store-photo"
+            src="/images/photo.jfif" 
+            alt="Store Photo" 
+            style={{ 
+              height: '36px', 
+              width: 'auto', 
+              objectFit: 'contain',
+              borderRadius: '4px'
+            }} 
+          />
+        </div>
 
         {/* Desktop Nav Links */}
         <nav
@@ -253,9 +268,15 @@ export default function Navbar({ onSearchOpen, onTrackOrderOpen }) {
       )}
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
           #main-nav { display: none !important; }
           #mobile-menu-btn { display: flex !important; }
+        }
+        @media (max-width: 480px) {
+          #site-logo > span:first-of-type { font-size: 18px !important; }
+          #site-logo > span:last-of-type { font-size: 6px !important; }
+          .store-photo { height: 28px !important; }
+          .container { gap: 8px !important; }
         }
       `}</style>
     </header>

@@ -4,9 +4,8 @@ const messages = [
   '🚚 FREE DELIVERY on orders above Rs. 10,000',
   '💳 CASH ON DELIVERY available Nationwide',
   '🔄 7-Day Easy Exchange Policy',
-  '📞 Customer Support: Mon–Sat 10am–7pm',
-  '✨ NEW DROP — Summer Elite \'26 Collection is LIVE',
-  '🎁 Use code DN10 for 10% OFF your first order',
+  '📞 Customer Support: 24/7',
+  '🚚 300 DC Advance For Order Confirmation',
 ];
 
 export default function AnnouncementBar() {

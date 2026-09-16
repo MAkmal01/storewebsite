@@ -172,6 +172,31 @@ export default function HeroBanner() {
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 640px) {
+          #hero .container {
+            padding: 60px 16px !important;
+            text-align: center;
+            align-items: center;
+          }
+          #hero p {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          #hero > div > span {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          #hero-cta-btn, #hero-combos-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          #hero > div > div:last-child {
+            justify-content: center;
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

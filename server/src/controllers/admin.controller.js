@@ -81,6 +81,26 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+const parseList = (val) => {
+  if (!val) return [];
+  if (Array.isArray(val)) {
+    return val.map((item) => String(item).trim()).filter(Boolean);
+  }
+  if (typeof val === 'string') {
+    try {
+      const parsed = JSON.parse(val);
+      if (Array.isArray(parsed)) {
+        return parsed.map((item) => String(item).trim()).filter(Boolean);
+      }
+    } catch (e) {}
+    return val
+      .split('\n')
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
 // POST /api/admin/products
 export const createProduct = async (req, res) => {
   try {
@@ -96,7 +116,13 @@ export const createProduct = async (req, res) => {
     }
     
     const slug = req.body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-    const productData = { ...req.body, slug, images: imageUrls };
+    const productData = { 
+      ...req.body, 
+      slug, 
+      images: imageUrls,
+      details: parseList(req.body.details),
+      careInstructions: parseList(req.body.careInstructions),
+    };
     const product = await Product.create(productData);
     res.status(201).json(product);
   } catch (error) {
@@ -123,6 +149,12 @@ export const updateProduct = async (req, res) => {
     }
     
     const productData = { ...req.body, images: imageUrls.length > 0 ? imageUrls : req.body.images };
+    if (req.body.details !== undefined) {
+      productData.details = parseList(req.body.details);
+    }
+    if (req.body.careInstructions !== undefined) {
+      productData.careInstructions = parseList(req.body.careInstructions);
+    }
     const product = await Product.findByIdAndUpdate(req.params.id, productData, { new: true, runValidators: true });
     if (!product) return res.status(404).json({ message: 'Product not found.' });
     res.json(product);

@@ -199,7 +199,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* Main Grid */}
-      <div className="container" style={{ padding: '0 24px 80px', display: 'grid', gridTemplateColumns: '1fr 380px', gap: '32px', alignItems: 'start', maxWidth: '1100px' }}>
+      <div className="container checkout-grid" style={{ padding: '0 24px 80px', display: 'grid', gridTemplateColumns: '1fr 380px', gap: '32px', alignItems: 'start', maxWidth: '1100px' }}>
         {/* Left: Steps */}
         <div>
           {/* Step 1: Cart Review */}
@@ -508,7 +508,7 @@ export default function CheckoutPage() {
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .checkout-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>

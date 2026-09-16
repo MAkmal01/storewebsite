@@ -19,7 +19,7 @@ const BADGES = [
   {
     icon: <Headphones size={24} />,
     title: 'Customer Support',
-    desc: 'Available Mon–Sat, 10am to 7pm',
+    desc: 'Available 24/7 for your assistance',
   },
   {
     icon: <Clock size={24} />,
