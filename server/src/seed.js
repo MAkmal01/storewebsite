@@ -276,9 +276,9 @@ const seedData = async () => {
 
     // Seed admin user
     await Admin.deleteMany({});
-    const admin = new Admin({ username: 'admin', password: 'admin123' });
+    const admin = new Admin({ username: 'admin', password: 'RoyalChoice@2024!' });
     await admin.save();
-    console.log('Admin user created (username: admin, password: admin123)');
+    console.log('Admin user created (username: admin, password: RoyalChoice@2024!)');
 
     console.log('Database seeding completed successfully.');
     process.exit(0);
