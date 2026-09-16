@@ -2,6 +2,7 @@
   "name": "store-website",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "MERN Stack E-Commerce / Store Application",
   "scripts": {
     "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,magenta\" \"npm run server\" \"npm run client\"",
